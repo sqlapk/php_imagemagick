@@ -5,7 +5,7 @@
 // путь до картинки 
 
 $real_image=$_SERVER['DOCUMENT_ROOT'] .'/img/20150729_134058.jpg';
-$path_image=$_SERVER['DOCUMENT_ROOT'] .'/img/dark.jpg';
+$path_image=$_SERVER['DOCUMENT_ROOT'] .'/img/img.jpg';
 $new_image=$_SERVER['DOCUMENT_ROOT'] .'/img/new.jpg';
 // echo $path_image."<br>";
 $im = new Imagick($tmp_image);
@@ -14,14 +14,14 @@ $im = new Imagick($tmp_image);
 
 
 $target_mean = 46000;
-$Img = new Imagick($real_image);
+$Img = new Imagick($path_image);
 $mean = $Img->getImageChannelMean(imagick::CHANNEL_ALL)['mean'];
 
 if($target_mean > $mean * 1.05){
 	/* не изменится, если яркость в пределах 5% */
     $perc_diff = ($target_mean / $mean) * 100;
     $Img->modulateImage($perc_diff,100,100);
-    $Img->writeImage($new_image);
+    // $Img->writeImage($new_image);
     echo "Созданно новое изображение";
 }
 else{
